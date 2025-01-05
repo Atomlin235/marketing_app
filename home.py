@@ -203,6 +203,7 @@ def main():
     number_finder(URL)
     st.subheader("CMS")
     cms_finder(URL)
+    st.subheader("Google Analytics & Tag Manager")
     find_tags(URL)
 
 
