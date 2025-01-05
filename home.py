@@ -141,7 +141,8 @@ def find_tags(URL):
                     ga4_tags.extend(ga4_matches)  # Add all found GA4 tags to the list
                 elif 'gtag' in script_text or 'google-analytics' in script_text:
                     ga4_found = True
-
+                    ga4_matches = re.findall(r'G-[A-Z0-9]+', script_text)
+                    ga4_tags.extend(ga4_matches)  # Add all found GA4 tags to the list
                 # Check for GTM
                 if 'GTM-' in script_text:
                     gtm_found = True
