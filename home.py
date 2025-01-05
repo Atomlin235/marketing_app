@@ -4,54 +4,55 @@ import re
 from bs4 import BeautifulSoup
 
 def number_finder(URL:str):
-        if URL:
-            try:
+    if URL:
+        try:
             # Send GET request to the URL
-                response = requests.get(URL)
-                response.raise_for_status()  # Raise an exception for bad status codes
-        
-                # Parse the HTML content
-                soup = BeautifulSoup(response.text, 'html.parser')
-        
-                # Get all text content from the webpage
-                text_content = soup.get_text()
-        
-                # Regular expression pattern for phone numbers
-                # This pattern covers various phone number formats:
-                # (123) 456-7890
-                # 123-456-7890
-                # 123.456.7890
-                # 1234567890
-                # +1 123-456-7890
-                phone_pattern = r'''(?:
-                (?:\+?\d{1,3}[-.\s]?)?      # optional country code, e.g., +1, +91
-                (?:\(?\d{3}\)?[-.\s]?)      # optional area code, e.g., (123) or 123
-                \d{3}[-.\s]?                # first 3 digits, e.g., 456
-                \d{4}                       # last 4 digits, e.g., 7890
-                (?:\s?(?:ext|x|extension)\s?\d{1,5})?  # optional extension, e.g., ext123 or x12345
-                )'''
-        
-                # Find all phone numbers in the text
-                phone_numbers = re.findall(phone_pattern, text_content, re.VERBOSE)
-        
-                # Clean up phone numbers by removing extra whitespace
-                phone_numbers = [number.strip() for number in phone_numbers]
-        
-                # Using a set to only keep unique numbers
-                unique_numbers = list(set(phone_numbers))
-        
-                # If phone numbers are found, return them as a comma-separated string
-                if unique_numbers:
-                    Output1 = ', '.join(unique_numbers)
-                    st.write(Output1)
-                else:
-                    st.write("No phone numbers found on the webpage")
-            
-            
-            except requests.RequestException as e:
-                st.write(f"Error accessing the webpage: {str(e)}")
-            except Exception as e:
-                st.write(f"An error occurred: {str(e)}")
+            response = requests.get(URL, timeout=10)
+            response.raise_for_status()  # Raise an exception for bad status codes
+
+            # Parse the HTML content
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            # Get all text content from the webpage
+            text_content = soup.get_text()
+
+            # Regular expression pattern for phone numbers including 'tel:'
+            phone_pattern = r'''(?:
+                tel:\s*                # Match 'tel:' prefix optionally followed by spaces
+                (?:\+?\d{1,3}[-.\s]?)? # Optional country code, e.g., +1, +91
+                (?:\(?\d{3}\)?[-.\s]?) # Optional area code, e.g., (123) or 123
+                \d{3}[-.\s]?           # First 3 digits, e.g., 456
+                \d{4}                  # Last 4 digits, e.g., 7890
+                (?:\s?(?:ext|x|extension)\s?\d{1,5})?  # Optional extension, e.g., ext123 or x12345
+                |
+                (?:\+?\d{1,3}[-.\s]?)? # Optional country code for standalone numbers
+                (?:\(?\d{3}\)?[-.\s]?) # Optional area code
+                \d{3}[-.\s]?           # First 3 digits
+                \d{4}                  # Last 4 digits
+                (?:\s?(?:ext|x|extension)\s?\d{1,5})?  # Optional extension
+            )'''
+
+            # Find all phone numbers in the text
+            phone_numbers = re.findall(phone_pattern, text_content, re.VERBOSE)
+
+            # Clean up phone numbers by removing extra whitespace
+            phone_numbers = [number.strip() for number in phone_numbers]
+
+            # Using a set to only keep unique numbers
+            unique_numbers = list(set(phone_numbers))
+
+            # If phone numbers are found, return them as a comma-separated string
+            if unique_numbers:
+                Output1 = ', '.join(unique_numbers)
+                st.write("Phone Numbers Found:")
+                st.write(Output1)
+            else:
+                st.write("No phone numbers found on the webpage")
+
+        except requests.RequestException as e:
+            st.write(f"Error accessing the webpage: {str(e)}")
+        except Exception as e:
+            st.write(f"An error occurred: {str(e)}")
     
 def cms_finder(URL):
     if URL:
@@ -168,14 +169,19 @@ def find_tags(URL):
             gtm_tags = list(set(gtm_tags))
 
             # Display results
-            if ga4_found:
-                st.write('GA4 Found')
-                st.write(ga4_tags)
+            st.subheader('GA4 Tags:')
+            if ga4_found and len(ga4_tags)>=1:
+                
+                for ga4_tag in ga4_tags:
+                    st.write(ga4_tag)
             else:
                 st.write('GA4 Not Found')
-            if gtm_found:
-                st.write('GTM Found')
-                st.write(gtm_tags)
+
+            st.subheader('GTM Tags:')
+            if gtm_found and len(gtm_tags)>=1:
+                
+                for gtm_tag in gtm_tags:
+                    st.write(gtm_tag)
             else:
                 st.write('GTM Not Found')
 
@@ -193,7 +199,9 @@ def main():
     pg = st.navigation([home, about])
 
     URL = st.text_input("input url")
+    st.subheader("Phone Numbers")
     number_finder(URL)
+    st.subheader("CMS")
     cms_finder(URL)
     find_tags(URL)
 
