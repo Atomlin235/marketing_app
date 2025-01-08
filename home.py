@@ -2,8 +2,7 @@ import streamlit as st
 import requests
 import re
 from bs4 import BeautifulSoup
-import ollama
-import time 
+
 
 def number_finder(URL:str):
     if URL:
@@ -266,18 +265,10 @@ Keep responses to the point. If someone replies with "thanks" or a similar short
         st.write(str)
 
 def ai_bot(url:str):
-
+    web_address = url
     prompt = f"I am creating an AI chatbot with the following company: {url}. Please can you give me a summary of the company and what they offer, which I can tell the chatbot to give it more information to work with"
 
-    if prompt:
-        with st.spinner("Thinking"):
-            result = ollama.chat(model="tinyllama",messages=[{
-                "role":"user",
-                "content:":prompt,
-            }])
-            response = result["message"]["content"]
-            st.write(response)
-
+    
 def main():
     home = st.Page("home.py", title="Home", icon=":material/add_circle:")
     about = st.Page("about.py", title="about", icon=":material/delete:")
@@ -299,9 +290,7 @@ def main():
     css_selector(URL)
     st.subheader("Business Settings Set Up")
     business_setting(business_name)
-    st.subheader("Assistant Personality Box Text")
-    ai_bot(URL)
-
+    
 
 
 
