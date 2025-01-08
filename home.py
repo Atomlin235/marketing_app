@@ -269,7 +269,7 @@ def ai_prompt(url:str):
 
     if web_address:
         prompt = f"I am creating an AI chatbot with the following company: {url}. Please can you give me a summary of the company and what they offer, which I can tell the chatbot to give it more information to work with"
-        st.write("Insert Into Chat GPT And Copy The Response")
+        st.markdown(''':red[Insert Into Chat GPT And Copy The Response]''')
         st.write(prompt)
     
 def main():
