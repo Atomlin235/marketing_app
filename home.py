@@ -264,7 +264,7 @@ Keep responses to the point. If someone replies with "thanks" or a similar short
 """
         st.write(str)
 
-def ai_rompt(url:str):
+def ai_prompt(url:str):
     web_address = url
 
     if web_address:
@@ -294,6 +294,7 @@ def main():
     st.subheader("Business Settings Set Up")
     business_setting(business_name)
     st.subheader("Ai Assitant Personality Prompt Generator")
+    ai_prompt(URL)
     
 
 
