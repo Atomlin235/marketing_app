@@ -190,8 +190,50 @@ def find_tags(URL):
             st.write(f"Error accessing the webpage: {str(e)}")
         except Exception as e:
             st.write(f"An error occurred: {str(e)}")
-        
 
+def css_selector(url:str):
+    if url:
+        try:
+            # Parse the HTML
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            # Find all form elements
+            forms = soup.find_all('form')  # Get all forms in the document
+
+            if forms:
+                for index, form in enumerate(forms, start=1):
+                    print(f"\nProcessing Form {index}:\n")
+            
+                    # Build the CSS selector
+                    path_parts = []
+                    current = form
+                    while current:
+                        if current.get('id'):
+                    # If an ID is found, it's unique enough; stop here
+                            selector = f"#{current['id']}"
+                            path_parts.append(selector)
+                            break
+                        elif current.get('class'):
+                            # If no ID, use classes to identify the element
+                            selector = current.name + '.' + '.'.join(current['class'])
+                        else:
+                            # Otherwise, use just the tag name
+                            selector = current.name
+                        path_parts.append(selector)
+                        current = current.parent
+            
+                    # Reverse the path to start from the root
+                    css_selector = ' > '.join(reversed(path_parts))
+                    st.write(f"Generated CSS Selector for Form {index}: {css_selector}")
+            else:
+                print("No form elements found in the HTML.")
+        
+        except requests.RequestException as e:
+            st.write(f"Error accessing the webpage: {str(e)}")
+        except Exception as e:
+            st.write(f"An error occurred: {str(e)}")
 
 def main():
     home = st.Page("home.py", title="Home", icon=":material/add_circle:")
@@ -206,6 +248,8 @@ def main():
     cms_finder(URL)
     st.subheader("Google Analytics & Tag Manager")
     find_tags(URL)
+    st.subheader("Form CSS")
+    css_selector(URL)
 
 
 
