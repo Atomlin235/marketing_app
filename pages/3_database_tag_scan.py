@@ -17,7 +17,7 @@ def main():
         st.dataframe(updated_df)
 
         cms_counts = updated_df['CMS'].value_counts()
-        st.dataframe(cms_counts)
+        st.bar_chart(cms_counts,use_container_width=True)
 
 # Plot the bar chart
         
