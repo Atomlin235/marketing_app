@@ -20,6 +20,19 @@ def main():
         st.bar_chart(cms_counts,use_container_width=True)
 
 # Plot the bar chart
+    st.markdown('''
+List of CMS:
+WordPress
+GoDaddy
+Joomla
+Drupal
+Wix
+Shopify
+Magento
+Ghost
+Squarespace
+unknown or custom or go daddy  
+                ''')
         
 
     
