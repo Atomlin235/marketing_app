@@ -187,7 +187,7 @@ def cms_finder_scan(URL):
             elif 'squarespace.com' in response.text:
                 cms = "Squarespace"
             else:
-                cms = "unknown or custom"
+                cms = "unknown or custom or go daddy"
             return cms
         except requests.RequestException as e:
             return f"Error"
