@@ -150,7 +150,9 @@ def cms_finder_scan(URL):
                 cms = "WordPress"
             elif 'wp-content' in response.text or 'wp-includes' in response.text:
                 cms = "WordPress"
-            
+            # GoDaddy Website Builder indicator
+            elif soup.find('meta', {'name': 'generator', 'content': lambda x: x and 'Go Daddy Website Builder' in x}):
+                cms = "GoDaddy Website Builder"
             # Joomla indicators
             elif soup.find('meta', {'name': 'generator', 'content': lambda x: x and 'Joomla' in x}):
                 cms = "Joomla"
