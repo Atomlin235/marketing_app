@@ -8,6 +8,7 @@ import time
 
 def main():
     st.subheader("Data/Web Scanner")
+    st.subheader("Current Max Scannable 800 0.7s ->1.2s per row")
     uploaded_file = st.file_uploader(
     "Choose a CSV file", accept_multiple_files=False
     )
@@ -19,7 +20,7 @@ def main():
 
         cms_counts = updated_df['CMS'].value_counts()
         st.bar_chart(cms_counts,use_container_width=True)
-    st.subheader("Current Max Scannable 800")
+    
 
 # Plot the bar chart
     st.markdown('''
