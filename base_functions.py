@@ -350,7 +350,6 @@ def add_cms_column(df, column_name, scan_function):
     # Apply the scan function to each URL in the specified column
     def process_row(url, index):
         print(f"Scanning index: {index}")
-        st.write(index)
         return scan_function(url) if pd.notna(url) else None
 
     df['CMS'] = [process_row(row[column_name], idx) for idx, row in df.iterrows()]
