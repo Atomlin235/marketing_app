@@ -7,6 +7,7 @@ import time
 
 
 def main():
+    st.subheader("Current Max Scannable 800")
     uploaded_file = st.file_uploader(
     "Choose a CSV file", accept_multiple_files=False
     )
