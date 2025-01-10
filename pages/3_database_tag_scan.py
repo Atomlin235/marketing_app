@@ -9,7 +9,7 @@ import time
 def main():
     st.subheader("Data/Web Scanner")
     st.subheader("Current Max Scannable 800 0.7s ->1.2s per row")
-    st.write("This application will scan through any data in CSV format and will scrape a column called Website Url and append a new column to the table with the CMS of each web address.")
+    st.write("This application will scan through any data in CSV format and will scrape a column called Website Url and append a new column to the table with the CMS of each web address. The new table is downloadable.Volume of each CMS displayed in Barchart")
     uploaded_file = st.file_uploader(
     "Choose a CSV file", accept_multiple_files=False
     )
