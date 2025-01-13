@@ -12,6 +12,8 @@ def main():
     bf.cms_finder(URL)
     st.subheader("Google Analytics & Tag Manager")
     bf.find_tags(URL)
+    st.subheader("iFrames/Third Parties")
+    bf.iframe_finder(URL)
 
 if __name__ == "__main__":
     main()
