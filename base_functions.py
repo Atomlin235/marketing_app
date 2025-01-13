@@ -363,68 +363,36 @@ def iframe_finder(url:str):
     if url:
         try:
             # Send GET request to URL
-            response = requests.get(url, timeout=10)
+            response = requests.get(URL, timeout=10)
             response.raise_for_status()
             soup = BeautifulSoup(response.text, 'html.parser')
             
-            # Find all iframe elements
-            iframes = soup.find_all('iframe')
-            found_iframes = []
+            # Initialize a list to store Calendly elements
+            calendly_elements = []
             
-            # Check if any iframe src contains "calendly"
+            # Find all iframes with a Calendly src
+            iframes = soup.find_all('iframe')
             for iframe in iframes:
                 src = iframe.get('src')
                 if src and 'calendly' in src.lower():
-                    found_iframes.append(src)
+                    calendly_elements.append({'type': 'iframe', 'content': str(iframe)})
             
-            # Print or return the  iframe src(s)
-            if found_iframes:
-                print("Iframe(s) found:")
-                for iframe_src in found_iframes:
-                    st.write(iframe_src)
+            # Find all divs with a Calendly data-url
+            divs = soup.find_all('div', {'class': 'calendly-inline-widget'})
+            for div in divs:
+                data_url = div.get('data-url')
+                if data_url and 'calendly' in data_url.lower():
+                    calendly_elements.append({'type': 'div', 'content': str(div)})
+            
+            # Print or return the found elements
+            if calendly_elements:
+                st.write("Calendly Found")
             else:
-                st.write("No iframes found.")
+                print("No Calendly elements found.")
         
         except requests.exceptions.RequestException as e:
             print(f"Error fetching URL: {e}")
 
-def iframe_finder_with_selenium(url: str):
-    if url:
-        try:
-            # Setup Selenium WebDriver
-            options = Options()
-            options.add_argument("--headless")  # Run in headless mode
-            service = Service("/path/to/chromedriver")  # Replace with your chromedriver path
-            driver = webdriver.Chrome(service=service, options=options)
-            
-            # Load the URL
-            driver.get(url)
-            
-            # Wait for the iframes to load (optional)
-            driver.implicitly_wait(5)
-            
-            # Find all iframe elements
-            iframes = driver.find_elements(By.TAG_NAME, 'iframe')
-            found_iframes = []
-            
-            for iframe in iframes:
-                src = iframe.get_attribute('src')
-                if src and 'calendly' in src.lower():
-                    found_iframes.append(src)
-            
-            # Print or return the iframe src(s)
-            if found_iframes:
-                print("Iframe(s) found:")
-                for iframe_src in found_iframes:
-                    st.write(iframe_src)
-            else:
-                st.write("No iframes found.")
-            
-            # Close the browser
-            driver.quit()
-        
-        except Exception as e:
-            print(f"Error: {e}")
 
 
 
