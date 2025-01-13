@@ -373,13 +373,13 @@ def iframe_finder(url:str):
                 if src and 'calendly' in src.lower():
                     found_iframes.append(src)
             
-            # Print or return the Calendly iframe src(s)
+            # Print or return the  iframe src(s)
             if found_iframes:
                 print("Iframe(s) found:")
                 for iframe_src in found_iframes:
-                    print(iframe_src)
+                    st.write(iframe_src)
             else:
-                print("No iframes found.")
+                st.write("No iframes found.")
         
         except requests.exceptions.RequestException as e:
             print(f"Error fetching URL: {e}")
