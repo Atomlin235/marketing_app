@@ -1,0 +1,169 @@
+{
+    "exportFormatVersion": 2,
+    "exportTime": "2023-05-25 13:50:28",
+    "containerVersion": {
+        "path": "accounts/1164259306/containers/119126685/versions/0",
+        "accountId": "1164259306",
+        "containerId": "119126685",
+        "containerVersionId": "0",
+        "container": {
+            "path": "accounts/1164259306/containers/119126685",
+            "accountId": "1164259306",
+            "containerId": "119126685",
+            "name": "Calendly GA4 recipe",
+            "publicId": "GTM-WJLHGMT",
+            "usageContext": [
+                "WEB"
+            ],
+            "fingerprint": "1685022443118",
+            "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/1164259306/containers/119126685/workspaces?apiLink=container",
+            "features": {
+                "supportUserPermissions": true,
+                "supportEnvironments": true,
+                "supportWorkspaces": true,
+                "supportGtagConfigs": false,
+                "supportBuiltInVariables": true,
+                "supportClients": false,
+                "supportFolders": true,
+                "supportTags": true,
+                "supportTemplates": true,
+                "supportTriggers": true,
+                "supportVariables": true,
+                "supportVersions": true,
+                "supportZones": true
+            },
+            "tagIds": [
+                "GTM-WJLHGMT"
+            ]
+        },
+        "tag": [
+            {
+                "accountId": "1164259306",
+                "containerId": "119126685",
+                "tagId": "3",
+                "name": "cHTML - Calendly listener",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\nwindow.dataLayer = window.dataLayer ||[];\nwindow.addEventListener('message',\n  function(e) {\n    if (e.data.event && e.data.event.indexOf('calendly') === 0) {\n      window.dataLayer.push({\n        'event' : 'calendly',\n        'calendly_event' : e.data.event.split('.')[1]\n      });\n    }\n  }\n);\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1685022496679",
+                "firingTriggerId": [
+                    "2147479553"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "1164259306",
+                "containerId": "119126685",
+                "tagId": "6",
+                "name": "GA4 event - calendar events - calendly",
+                "type": "gaawe",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "sendEcommerceData",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventName",
+                        "value": "calendar_{{dlv - calendly_event}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementId",
+                        "value": "none"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementIdOverride",
+                        "value": "{{INSERT YOUR MEASUREMENT ID HERE}}"
+                    }
+                ],
+                "fingerprint": "1685022608484",
+                "firingTriggerId": [
+                    "4"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            }
+        ],
+        "trigger": [
+            {
+                "accountId": "1164259306",
+                "containerId": "119126685",
+                "triggerId": "4",
+                "name": "custom - calendly",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "calendly"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1685022514266"
+            }
+        ],
+        "variable": [
+            {
+                "accountId": "1164259306",
+                "containerId": "119126685",
+                "variableId": "5",
+                "name": "dlv - calendly_event",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "calendly_event"
+                    }
+                ],
+                "fingerprint": "1685022569540",
+                "formatValue": {}
+            }
+        ],
+        "fingerprint": "1685022628201",
+        "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/1164259306/containers/119126685/versions/0?apiLink=version"
+    }
+}

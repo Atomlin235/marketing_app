@@ -1,0 +1,349 @@
+{
+    "exportFormatVersion": 2,
+    "exportTime": "2025-01-13 19:50:00",
+    "containerVersion": {
+        "path": "accounts/6264805026/containers/203891597/versions/0",
+        "accountId": "6264805026",
+        "containerId": "203891597",
+        "containerVersionId": "0",
+        "container": {
+            "path": "accounts/6264805026/containers/203891597",
+            "accountId": "6264805026",
+            "containerId": "203891597",
+            "name": "www.basic.setup",
+            "publicId": "GTM-KZN4N8HM",
+            "usageContext": [
+                "WEB"
+            ],
+            "fingerprint": "1736797573728",
+            "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/6264805026/containers/203891597/workspaces?apiLink=container",
+            "features": {
+                "supportUserPermissions": true,
+                "supportEnvironments": true,
+                "supportWorkspaces": true,
+                "supportGtagConfigs": false,
+                "supportBuiltInVariables": true,
+                "supportClients": false,
+                "supportFolders": true,
+                "supportTags": true,
+                "supportTemplates": true,
+                "supportTriggers": true,
+                "supportVariables": true,
+                "supportVersions": true,
+                "supportZones": true,
+                "supportTransformations": false
+            },
+            "tagIds": [
+                "GTM-KZN4N8HM"
+            ]
+        },
+        "tag": [
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "tagId": "5",
+                "name": "AP - Click Call",
+                "type": "gaawe",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "sendEcommerceData",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enhancedUserId",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventName",
+                        "value": "click_call"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementIdOverride",
+                        "value": "{{GA4 Measurement ID}}"
+                    }
+                ],
+                "fingerprint": "1736797691035",
+                "firingTriggerId": [
+                    "4"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "tagId": "6",
+                "name": "AP - GA4 TAG",
+                "type": "googtag",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "tagId",
+                        "value": "{{GA4 Measurement ID}}"
+                    }
+                ],
+                "fingerprint": "1736797704264",
+                "firingTriggerId": [
+                    "2147479573"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "tagId": "8",
+                "name": "AP - Click Email",
+                "type": "gaawe",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "sendEcommerceData",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enhancedUserId",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventName",
+                        "value": "click_email"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementIdOverride",
+                        "value": "{{GA4 Measurement ID}}"
+                    }
+                ],
+                "fingerprint": "1736797742575",
+                "firingTriggerId": [
+                    "7"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            },
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "tagId": "10",
+                "name": "AP - Contact Submit",
+                "type": "gaawe",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "sendEcommerceData",
+                        "value": "false"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "enhancedUserId",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventName",
+                        "value": "contact_submit"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "measurementIdOverride",
+                        "value": "{{GA4 Measurement ID}}"
+                    }
+                ],
+                "fingerprint": "1736797781330",
+                "firingTriggerId": [
+                    "9"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "monitoringMetadata": {
+                    "type": "MAP"
+                },
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            }
+        ],
+        "trigger": [
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "triggerId": "4",
+                "name": "click call",
+                "type": "LINK_CLICK",
+                "filter": [
+                    {
+                        "type": "CONTAINS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{Click URL}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "tel:"
+                            }
+                        ]
+                    }
+                ],
+                "waitForTags": {
+                    "type": "BOOLEAN",
+                    "value": "false"
+                },
+                "checkValidation": {
+                    "type": "BOOLEAN",
+                    "value": "false"
+                },
+                "waitForTagsTimeout": {
+                    "type": "TEMPLATE",
+                    "value": "2000"
+                },
+                "uniqueTriggerId": {
+                    "type": "TEMPLATE"
+                },
+                "fingerprint": "1736797689262"
+            },
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "triggerId": "7",
+                "name": "mailto",
+                "type": "LINK_CLICK",
+                "filter": [
+                    {
+                        "type": "CONTAINS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{Click URL}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "mailto:"
+                            }
+                        ]
+                    }
+                ],
+                "waitForTags": {
+                    "type": "BOOLEAN",
+                    "value": "false"
+                },
+                "checkValidation": {
+                    "type": "BOOLEAN",
+                    "value": "false"
+                },
+                "waitForTagsTimeout": {
+                    "type": "TEMPLATE",
+                    "value": "2000"
+                },
+                "uniqueTriggerId": {
+                    "type": "TEMPLATE"
+                },
+                "fingerprint": "1736797740551"
+            },
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "triggerId": "9",
+                "name": "contact submit",
+                "type": "FORM_SUBMISSION",
+                "waitForTags": {
+                    "type": "TEMPLATE"
+                },
+                "checkValidation": {
+                    "type": "TEMPLATE"
+                },
+                "waitForTagsTimeout": {
+                    "type": "TEMPLATE",
+                    "value": "2000"
+                },
+                "uniqueTriggerId": {
+                    "type": "TEMPLATE"
+                },
+                "fingerprint": "1736797778823"
+            }
+        ],
+        "variable": [
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "variableId": "3",
+                "name": "GA4 Measurement ID",
+                "type": "c",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "value",
+                        "value": "[CHANGE THIS VARIABLE]"
+                    }
+                ],
+                "fingerprint": "1736797651737",
+                "formatValue": {}
+            }
+        ],
+        "builtInVariable": [
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "type": "PAGE_URL",
+                "name": "Page URL"
+            },
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "type": "PAGE_HOSTNAME",
+                "name": "Page Hostname"
+            },
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "type": "PAGE_PATH",
+                "name": "Page Path"
+            },
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "type": "REFERRER",
+                "name": "Referrer"
+            },
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "type": "EVENT",
+                "name": "Event"
+            },
+            {
+                "accountId": "6264805026",
+                "containerId": "203891597",
+                "type": "CLICK_URL",
+                "name": "Click URL"
+            }
+        ],
+        "fingerprint": "1736797800526",
+        "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6264805026/containers/203891597/versions/0?apiLink=version"
+    }
+}
