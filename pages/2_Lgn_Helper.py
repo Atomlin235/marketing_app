@@ -13,7 +13,7 @@ def main():
     st.subheader("Google Analytics & Tag Manager")
     bf.find_tags(URL)
     st.subheader("iFrames/Third Parties")
-    bf.iframe_finder_with_selenium(URL)
+    bf.iframe_finder(URL)
 
 if __name__ == "__main__":
     main()
