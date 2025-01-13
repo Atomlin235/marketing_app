@@ -355,5 +355,34 @@ def add_cms_column(df, column_name, scan_function):
     df['CMS'] = [process_row(row[column_name], idx) for idx, row in df.iterrows()]
     return df
 
+def iframe_finder(url:str):
+    if URL:
+        try:
+            # Send GET request to URL
+            response = requests.get(URL, timeout=10)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, 'html.parser')
+            
+            # Find all iframe elements
+            iframes = soup.find_all('iframe')
+            found_iframes = []
+            
+            # Check if any iframe src contains "calendly"
+            for iframe in iframes:
+                src = iframe.get('src')
+                if src and 'calendly' in src.lower():
+                    found_iframes.append(src)
+            
+            # Print or return the Calendly iframe src(s)
+            if found_iframes:
+                print("Iframe(s) found:")
+                for iframe_src in found_iframes:
+                    print(iframe_src)
+            else:
+                print("No iframes found.")
+        
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching URL: {e}")
+
 
 
