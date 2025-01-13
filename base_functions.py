@@ -3,6 +3,10 @@ import re
 from bs4 import BeautifulSoup
 import streamlit as st
 import pandas as pd
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 
 def number_finder(URL:str):
     if URL:
@@ -383,6 +387,44 @@ def iframe_finder(url:str):
         
         except requests.exceptions.RequestException as e:
             print(f"Error fetching URL: {e}")
+
+def iframe_finder_with_selenium(url: str):
+    if url:
+        try:
+            # Setup Selenium WebDriver
+            options = Options()
+            options.add_argument("--headless")  # Run in headless mode
+            service = Service("/path/to/chromedriver")  # Replace with your chromedriver path
+            driver = webdriver.Chrome(service=service, options=options)
+            
+            # Load the URL
+            driver.get(url)
+            
+            # Wait for the iframes to load (optional)
+            driver.implicitly_wait(5)
+            
+            # Find all iframe elements
+            iframes = driver.find_elements(By.TAG_NAME, 'iframe')
+            found_iframes = []
+            
+            for iframe in iframes:
+                src = iframe.get_attribute('src')
+                if src and 'calendly' in src.lower():
+                    found_iframes.append(src)
+            
+            # Print or return the iframe src(s)
+            if found_iframes:
+                print("Iframe(s) found:")
+                for iframe_src in found_iframes:
+                    st.write(iframe_src)
+            else:
+                st.write("No iframes found.")
+            
+            # Close the browser
+            driver.quit()
+        
+        except Exception as e:
+            print(f"Error: {e}")
 
 
 
