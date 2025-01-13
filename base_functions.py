@@ -362,8 +362,8 @@ def add_cms_column(df, column_name, scan_function):
 def iframe_finder(url:str):
     if url:
         try:
-            # Send GET request to URL
-            response = requests.get(URL, timeout=10)
+            # Send GET request to url
+            response = requests.get(url, timeout=10)
             response.raise_for_status()
             soup = BeautifulSoup(response.text, 'html.parser')
             
