@@ -359,39 +359,57 @@ def add_cms_column(df, column_name, scan_function):
     df['CMS'] = [process_row(row[column_name], idx) for idx, row in df.iterrows()]
     return df
 
-def iframe_finder(url:str):
+def iframe_finder(url: str):
     if url:
         try:
-            # Send GET request to url
+            # Send GET request to URL
             response = requests.get(url, timeout=10)
             response.raise_for_status()
             soup = BeautifulSoup(response.text, 'html.parser')
             
-            # Initialize a list to store Calendly elements
+            # Initialize lists to store Calendly and Acuity elements
             calendly_elements = []
+            acuity_elements = []
             
-            # Find all iframes with a Calendly src
+            # Find all iframes
             iframes = soup.find_all('iframe')
             for iframe in iframes:
                 src = iframe.get('src')
-                if src and 'calendly' in src.lower():
-                    calendly_elements.append({'type': 'iframe', 'content': str(iframe)})
+                if src:
+                    # Check for Calendly iframe
+                    if 'calendly' in src.lower():
+                        calendly_elements.append({'type': 'iframe', 'content': str(iframe)})
+                    # Check for Acuity iframe
+                    elif 'acuityscheduling' in src.lower():
+                        acuity_elements.append({'type': 'iframe', 'content': str(iframe)})
             
-            # Find all divs with a Calendly data-url
-            divs = soup.find_all('div', {'class': 'calendly-inline-widget'})
+            # Find all divs with potential scheduling classes
+            divs = soup.find_all('div')
             for div in divs:
                 data_url = div.get('data-url')
-                if data_url and 'calendly' in data_url.lower():
-                    calendly_elements.append({'type': 'div', 'content': str(div)})
+                if data_url:
+                    # Check for Calendly div
+                    if 'calendly' in data_url.lower():
+                        calendly_elements.append({'type': 'div', 'content': str(div)})
             
-            # Print or return the found elements
+            # Print or return results for Calendly
             if calendly_elements:
-                st.write("Calendly Found")
+                st.write("Calendly Found:")
+                for element in calendly_elements:
+                    st.write(f"Type: {element['type']}, Content: {element['content']}")
             else:
-                print("No Calendly elements found.")
+                st.write("No Calendly elements found.")
+            
+            # Print or return results for Acuity
+            if acuity_elements:
+                st.write("Acuity Found:")
+                for element in acuity_elements:
+                    st.write(f"Type: {element['type']}, Content: {element['content']}")
+            else:
+                st.write("No Acuity elements found.")
         
         except requests.exceptions.RequestException as e:
-            print(f"Error fetching URL: {e}")
+            st.write(f"Error fetching URL: {e}")
 
 
 
